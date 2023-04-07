@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t sophiedodson/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true sophiedodson/react-test npm test
 
 after_success:
-  - docker build -t sophiedodson/multi-client ./client
-  - docker build -t sophiedodson/multi-nginx ./nginx
-  - docker build -t sophiedodson/multi-server ./server
-  - docker build -t sophiedodson/multi-worker ./worker
+  - docker build -t stephengrider/multi-client ./client
+  - docker build -t stephengrider/multi-nginx ./nginx
+  - docker build -t stephengrider/multi-server ./server
+  - docker build -t stephengrider/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push sophiedodson/multi-client
-  - docker push sophiedodson/multi-nginx
-  - docker push sophiedodson/multi-server
-  - docker push sophiedodson/multi-worker
+  - docker push stephengrider/multi-client
+  - docker push stephengrider/multi-nginx
+  - docker push stephengrider/multi-server
+  - docker push stephengrider/multi-worker
